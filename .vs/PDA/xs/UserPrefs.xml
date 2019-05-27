@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{FAD34D35-D944-4EC4-A641-88A728E96820}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PDA/Transitions.cs">
+    <Files>
+      <File FileName="PDA/Program.cs" Line="24" Column="32" />
+      <File FileName="PDA/StackC.cs" Line="6" Column="1" />
+      <File FileName="PDA/Transitions.cs" Line="25" Column="1" />
+      <File FileName="PDA/State.cs" Line="31" Column="10" />
+      <File FileName="PDA/PDA.cs" Line="59" Column="54" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="PDA" expanded="True">
+            <Node name="PDA" expanded="True">
+              <Node name="Properties" expanded="True" />
+              <Node name="Transitions.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.PDA PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
