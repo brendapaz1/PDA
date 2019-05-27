@@ -1,52 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
-
-
-namespace testy
+namespace PDA
 {
-    public class PDA
+    class MainClass
     {
-        public string[] alphabet = { "a", "b", "c", "d", "e", "r", "1", "0" };
-        public string input { get; set; }
-        public Queue<String> inputQueue { get; set; }
-        public Stack<char> State = new Stack<char>();
-        public PDA(string input)
+        public static void Main(string[] args)
         {
-            this.input = input;
-        }
+            for (; ; )
+            {
+                string[] alphabet = { "a", "b", "c","d","e","r","1","0" };
+                Console.WriteLine("Enter a string: ");
+                string chain = Console.ReadLine();
+                chain = chain.Replace(" ", "");
+                var inputChain = new Queue(Split(chain));
+                bool verify = VerifyChain(inputChain, alphabet);
+                Stack<char> State = new Stack<char>();
+                if (!verify)
+                {
+                    Console.WriteLine("not my language");
+                }
+                else
+                {
+                    PDA(1, inputChain, State);
+                }
+            }
 
-         public void Init()
-        {
-            input = input.Replace(" ", "");
-            var inputChain = new Queue(Split(input));
-            bool verify = VerifyChain(inputChain, alphabet);
-            if (!verify)
-            {
-                Message("It's not my language");
-            }
-            else
-            {
-                TransitionPDA(1, inputChain, State);
-            }
+
         }
 
         public static String[] Split(string chain)
         {
             string pattern = @"";
             String[] charChain = Regex.Split(chain, pattern);
+            //char[] charChain = chain.ToArray();
             List<string> first = new List<string>();
 
             for (int i = 0; i < charChain.Length; i++)
             {
                 if (i < charChain.Length / 2) first.Add(charChain[i].ToString());
                 else if (i == charChain.Length / 2) first.Add("#");
-                else first.Add(charChain[i - 1].ToString());
+                else first.Add(charChain[i-1].ToString());
 
             }
 
@@ -65,12 +62,12 @@ namespace testy
             return equal;
         }
 
-        public static void TransitionPDA(int numState, Queue input, Stack<char> stack)
+        public static void PDA(int numState, Queue input, Stack<char> stack)
         {
             if (numState == 1)
             {
                 stack.Push('$');
-                TransitionPDA(2, input, stack);
+                PDA(2, input, stack);
             }
             else if (numState == 2)
             {
@@ -78,52 +75,52 @@ namespace testy
                 if (s == "a")
                 {
                     stack.Push('a');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "#")
                 {
 
-                    TransitionPDA(3, input, stack);
+                    PDA(3, input, stack);
 
                 }
                 else if (s == "b")
                 {
                     stack.Push('b');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "c")
                 {
                     stack.Push('c');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "d")
                 {
                     stack.Push('d');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "e")
                 {
                     stack.Push('e');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "r")
                 {
                     stack.Push('r');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "1")
                 {
                     stack.Push('1');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else if (s == "0")
                 {
                     stack.Push('0');
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
                 else
                 {
-                    TransitionPDA(2, input, stack);
+                    PDA(2, input, stack);
                 }
 
 
@@ -137,20 +134,21 @@ namespace testy
                     string s = input.Dequeue().ToString();
                     char i = stack.Pop();
 
+
                     if (i.ToString() == s)
                     {
-                        TransitionPDA(3, input, stack);
+                        PDA(3, input, stack);
                     }
                     else
                     {
-                        Message("It's not a palindrome");
+                        Console.WriteLine("no");
                     }
 
                 }
                 else
                 {
-                    if (stack.Count == 1) TransitionPDA(4, input, stack);
-                    else Message("It's not a palindrome");
+                    if (stack.Count == 1) PDA(4, input, stack);
+                    else Console.WriteLine("no");
 
 
                 }
@@ -158,16 +156,13 @@ namespace testy
             else
             {
                 stack.Pop();
-                Message("It is a palindrome");
+                Console.WriteLine("yes");
             }
-
+            
 
 
         }
 
-        public static string Message(string message)
-        {
-            return message;
-        }
+
     }
 }
