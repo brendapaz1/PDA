@@ -4,3 +4,7 @@
 /Users/brendapaz/Projects/PDA/PDA/obj/x86/Debug/PDA.csproj.CoreCompileInputs.cache
 /Users/brendapaz/Projects/PDA/PDA/obj/x86/Debug/PDA.exe
 /Users/brendapaz/Projects/PDA/PDA/obj/x86/Debug/PDA.pdb
+/Users/artemis/Documents/PDA/PDA/obj/x86/Debug/PDA.csprojAssemblyReference.cache
+/Users/artemis/Documents/PDA/PDA/obj/x86/Debug/PDA.csproj.CoreCompileInputs.cache
+/Users/artemis/Documents/PDA/PDA/obj/x86/Debug/PDA.exe
+/Users/artemis/Documents/PDA/PDA/obj/x86/Debug/PDA.pdb
