@@ -47,16 +47,12 @@ namespace testy
                 if (i < charChain.Length / 2) first.Add(charChain[i].ToString());
                 else if (i == charChain.Length / 2) first.Add("#");
                 else first.Add(charChain[i - 1].ToString());
-
             }
-
             foreach (var s in first)
             {
                 Console.WriteLine(s);
             }
-
             return first.ToArray();
-
         }
 
         public static bool VerifyChain(Queue input, string[] alphabet)

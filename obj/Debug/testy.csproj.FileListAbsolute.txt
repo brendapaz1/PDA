@@ -13,3 +13,17 @@ C:\Users\bpaz\Documents\Projects\testy\obj\Debug\testy.csproj.GenerateResource.c
 C:\Users\bpaz\Documents\Projects\testy\obj\Debug\testy.csproj.CoreCompileInputs.cache
 C:\Users\bpaz\Documents\Projects\testy\obj\Debug\testy.exe
 C:\Users\bpaz\Documents\Projects\testy\obj\Debug\testy.pdb
+C:\Users\sergi\Desktop\PDA\bin\Debug\testy.exe.config
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy.exe
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy.pdb
+C:\Users\sergi\Desktop\PDA\bin\Debug\testy.exe
+C:\Users\sergi\Desktop\PDA\bin\Debug\testy.pdb
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy.csprojResolveAssemblyReference.cache
+C:\Users\sergi\Desktop\PDA\obj\Debug\MainWindow.g.cs
+C:\Users\sergi\Desktop\PDA\obj\Debug\App.g.cs
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy_MarkupCompile.cache
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy_MarkupCompile.lref
+C:\Users\sergi\Desktop\PDA\obj\Debug\MainWindow.baml
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy.g.resources
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy.Properties.Resources.resources
+C:\Users\sergi\Desktop\PDA\obj\Debug\testy.csproj.GenerateResource.Cache
