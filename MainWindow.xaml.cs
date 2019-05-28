@@ -85,9 +85,8 @@ namespace testy
             if (numState == 1)
             {
                 InitialState.Fill = System.Windows.Media.Brushes.Blue;
-
-                stack.Push('$');
                 MessageBox.Show("Next Step");
+                stack.Push('$');
                 TransitionPDA(2, input, stack);
 
 
@@ -97,52 +96,45 @@ namespace testy
                 string q = input.Dequeue().ToString();
                 InitialState.Fill = System.Windows.Media.Brushes.White;
                 State2.Fill = System.Windows.Media.Brushes.Blue;
-
+                MessageBox.Show("Next Step");
                 if (q == "a")
                 {
                     stack.Push('a');
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else if (q == "#")
                 {
                     TransitionPDA(3, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else if (q == "b")
                 {
                     stack.Push('b');
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else if (q == "c")
                 {
                     stack.Push('c');
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else if (q == "d")
                 {
                     stack.Push('d');
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else if (q == "1")
                 {
                     stack.Push('1');
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else if (q == "0")
                 {
                     stack.Push('0');
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
                 }
                 else
                 {
                     TransitionPDA(2, input, stack);
-                    MessageBox.Show("Next Step");
+
                 }
             }
             else if (numState == 3)
@@ -150,7 +142,7 @@ namespace testy
                 InitialState.Fill = System.Windows.Media.Brushes.White;
                 State2.Fill = System.Windows.Media.Brushes.White;
                 State3.Fill = System.Windows.Media.Brushes.Blue;
-
+                MessageBox.Show("Next Step");
                 if (input.Count != 0)
                 {
                     string q = input.Dequeue().ToString();
