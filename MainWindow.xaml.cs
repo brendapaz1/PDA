@@ -28,7 +28,7 @@ namespace testy
         {
             InitializeComponent();
         }
-        string[] alphabet = { "a", "b", "c", "d", "1", "0" };
+        string[] alphabet = { "a", "b", "c", "d", "1", "0" }; //esto por que esta aqui? como volando
         public Queue<String> inputQueue { get; set; }
         public Stack<char> State = new Stack<char>();
         DispatcherTimer dispathcer = new DispatcherTimer();
@@ -96,7 +96,6 @@ namespace testy
                 string q = input.Dequeue().ToString();
                 InitialState.Fill = System.Windows.Media.Brushes.White;
                 State2.Fill = System.Windows.Media.Brushes.Blue;
-                MessageBox.Show("Next Step");
                 if (q == "a")
                 {
                     stack.Push('a');
@@ -133,24 +132,27 @@ namespace testy
                 }
                 else
                 {
+                    MessageBox.Show("Next Step");
                     TransitionPDA(2, input, stack);
 
                 }
+               
             }
             else if (numState == 3)
             {
                 InitialState.Fill = System.Windows.Media.Brushes.White;
                 State2.Fill = System.Windows.Media.Brushes.White;
                 State3.Fill = System.Windows.Media.Brushes.Blue;
-                MessageBox.Show("Next Step");
+                //MessageBox.Show("Next Step");
                 if (input.Count != 0)
                 {
                     string q = input.Dequeue().ToString();
                     char i = stack.Pop();
                     if (i.ToString() == q)
                     {
-                        TransitionPDA(3, input, stack);
                         MessageBox.Show("Next Step");
+                        TransitionPDA(3, input, stack);
+                        
                     }
                     else
                     {
