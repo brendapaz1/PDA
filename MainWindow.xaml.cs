@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,6 +44,7 @@ namespace testy
             contenido.Replace(" ", "");
             var inputChain = new Queue(Split(contenido));
             bool verify = VerifyChain(inputChain, alphabet);
+
             if (!verify)
             {
                 //MessageBox.Show("It's not my language");
@@ -79,113 +81,112 @@ namespace testy
         }
         private void TransitionPDA(int numState, Queue input, Stack<char> stack)
         {
-            dispathcer.Interval = new TimeSpan(0, 0, 1);
 
+            if (numState == 1)
             {
-                if (numState == 1)
-                {
+                InitialState.Fill = System.Windows.Media.Brushes.Blue;
 
-                    InitialState.Fill = System.Windows.Media.Brushes.Blue;
-                    stack.Push('$');
+                stack.Push('$');
+                MessageBox.Show("Next Step");
+                TransitionPDA(2, input, stack);
+
+
+            }
+            else if (numState == 2)
+            {
+                string q = input.Dequeue().ToString();
+                InitialState.Fill = System.Windows.Media.Brushes.White;
+                State2.Fill = System.Windows.Media.Brushes.Blue;
+
+                if (q == "a")
+                {
+                    stack.Push('a');
                     TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
                 }
-
-
-
-
-
-
-
-                else if (numState == 2)
+                else if (q == "#")
                 {
+                    TransitionPDA(3, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+                else if (q == "b")
+                {
+                    stack.Push('b');
+                    TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+                else if (q == "c")
+                {
+                    stack.Push('c');
+                    TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+                else if (q == "d")
+                {
+                    stack.Push('d');
+                    TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+                else if (q == "1")
+                {
+                    stack.Push('1');
+                    TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+                else if (q == "0")
+                {
+                    stack.Push('0');
+                    TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+                else
+                {
+                    TransitionPDA(2, input, stack);
+                    MessageBox.Show("Next Step");
+                }
+            }
+            else if (numState == 3)
+            {
+                InitialState.Fill = System.Windows.Media.Brushes.White;
+                State2.Fill = System.Windows.Media.Brushes.White;
+                State3.Fill = System.Windows.Media.Brushes.Blue;
 
-
+                if (input.Count != 0)
+                {
                     string q = input.Dequeue().ToString();
-
-                    InitialState.Fill = System.Windows.Media.Brushes.White;
-                    State2.Fill = System.Windows.Media.Brushes.Blue;
-
-
-
-                    if (q == "a")
-                    {
-                        stack.Push('a');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "#")
+                    char i = stack.Pop();
+                    if (i.ToString() == q)
                     {
                         TransitionPDA(3, input, stack);
-                    }
-                    else if (q == "b")
-                    {
-                        stack.Push('b');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "c")
-                    {
-                        stack.Push('c');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "d")
-                    {
-                        stack.Push('d');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "1")
-                    {
-                        stack.Push('1');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "0")
-                    {
-                        stack.Push('0');
-                        TransitionPDA(2, input, stack);
+                        MessageBox.Show("Next Step");
                     }
                     else
                     {
-                        TransitionPDA(2, input, stack);
-                    }
-                }
-                else if (numState == 3)
-                {
+                        TxtFinal.Content = "It's not a palindrome";
 
-                    InitialState.Fill = System.Windows.Media.Brushes.White;
-                    State2.Fill = System.Windows.Media.Brushes.White;
-                    State3.Fill = System.Windows.Media.Brushes.Blue;
-
-                    if (input.Count != 0)
-                    {
-                        string z = input.Dequeue().ToString();
-                        char i = stack.Pop();
-
-                        if (i.ToString() == z)
-                        {
-                            TransitionPDA(3, input, stack);
-                        }
-                        else
-                        {
-                            TxtFinal.Content = "It's not a palindrome";
-                        }
-                    }
-                    else
-                    {
-                        if (stack.Count == 1) TransitionPDA(4, input, stack);
-                        else TxtFinal.Content = "It's not a palindrome";
                     }
                 }
                 else
                 {
-                    InitialState.Fill = System.Windows.Media.Brushes.White;
-                    State2.Fill = System.Windows.Media.Brushes.White;
-                    State3.Fill = System.Windows.Media.Brushes.White;
-                    FinalState.Fill = System.Windows.Media.Brushes.Blue;
-                    FinalState2.Fill = System.Windows.Media.Brushes.Blue;
-                    stack.Pop();
-                    TxtFinal.Content = "It is a palindrome";
+                    if (stack.Count == 1) TransitionPDA(4, input, stack);
+                    else TxtFinal.Content = "It's not a palindrome";
                 }
 
             }
+
+            else
+            {
+                InitialState.Fill = System.Windows.Media.Brushes.White;
+                State2.Fill = System.Windows.Media.Brushes.White;
+                State3.Fill = System.Windows.Media.Brushes.White;
+                FinalState.Fill = System.Windows.Media.Brushes.Blue;
+                FinalState2.Fill = System.Windows.Media.Brushes.Blue;
+                MessageBox.Show("End");
+                stack.Pop();
+                TxtFinal.Content = "It is a palindrome";
+            }
+
         }
+
     }
 }
-
