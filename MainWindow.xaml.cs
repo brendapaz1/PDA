@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,8 +31,7 @@ namespace testy
         public Queue<String> inputQueue { get; set; }
         public Stack<char> State = new Stack<char>();
         DispatcherTimer dispathcer = new DispatcherTimer();
-        public bool next = true;
-
+        
         private void PDAbutton_Click(object sender, RoutedEventArgs e)
         {
             init();
@@ -45,7 +43,6 @@ namespace testy
             contenido.Replace(" ", "");
             var inputChain = new Queue(Split(contenido));
             bool verify = VerifyChain(inputChain, alphabet);
-            
             if (!verify)
             {
                 //MessageBox.Show("It's not my language");
@@ -82,107 +79,114 @@ namespace testy
         }
         private void TransitionPDA(int numState, Queue input, Stack<char> stack)
         {
-           
-                if (numState == 1 &&  next == true)
-                {
-                    next = false;
-                    InitialState.Fill = System.Windows.Media.Brushes.Blue;
+            dispathcer.Interval = new TimeSpan(0, 0, 2);
 
+            if (numState == 1)
+            {
+                dispathcer.Tick += (s, a) =>
+                {
+                    InitialState.Fill = System.Windows.Media.Brushes.Blue;
                     stack.Push('$');
                     TransitionPDA(2, input, stack);
+                };
+                dispathcer.Start();
+                
+            }
 
-                }
-                else if (numState == 2 && next == true)
+
+            
+            else if (numState == 2)
+            {
+                dispathcer.Stop();
+
+                string q = input.Dequeue().ToString();
+                dispathcer.Tick += (s, a) =>
                 {
-                    next = false;
-                    string q = input.Dequeue().ToString();
                     InitialState.Fill = System.Windows.Media.Brushes.White;
                     State2.Fill = System.Windows.Media.Brushes.Blue;
-
-
-                    if (q == "a")
-                    {
-                        stack.Push('a');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "#")
-                    {
-                        TransitionPDA(3, input, stack);
-                    }
-                    else if (q == "b")
-                    {
-                        stack.Push('b');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "c")
-                    {
-                        stack.Push('c');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "d")
-                    {
-                        stack.Push('d');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "1")
-                    {
-                        stack.Push('1');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else if (q == "0")
-                    {
-                        stack.Push('0');
-                        TransitionPDA(2, input, stack);
-                    }
-                    else
-                    {
-                        TransitionPDA(2, input, stack);
-                    }
-                }
-                else if (numState == 3 && next == true)
+                };
+                dispathcer.Start();
+                
+                
+                if (q == "a")
                 {
-                    next = false;
+                    stack.Push('a');
+                    TransitionPDA(2, input, stack);
+                }
+                else if (q == "#")
+                {
+                    TransitionPDA(3, input, stack);
+                }
+                else if (q == "b")
+                {
+                    stack.Push('b');
+                    TransitionPDA(2, input, stack);
+                }
+                else if (q == "c")
+                {
+                    stack.Push('c');
+                    TransitionPDA(2, input, stack);
+                }
+                else if (q == "d")
+                {
+                    stack.Push('d');
+                    TransitionPDA(2, input, stack);
+                }
+                else if (q == "1")
+                {
+                    stack.Push('1');
+                    TransitionPDA(2, input, stack);
+                }
+                else if (q == "0")
+                {
+                    stack.Push('0');
+                    TransitionPDA(2, input, stack);
+                }
+                else
+                {
+                    TransitionPDA(2, input, stack);
+                }
+            }
+            else if (numState == 3)
+            {
+                dispathcer.Stop();
+                dispathcer.Tick += (s, a) =>
+                {
                     InitialState.Fill = System.Windows.Media.Brushes.White;
                     State2.Fill = System.Windows.Media.Brushes.White;
                     State3.Fill = System.Windows.Media.Brushes.Blue;
+                };
+                dispathcer.Start();
+                if (input.Count != 0)
+                {
+                    string s = input.Dequeue().ToString();
+                    char i = stack.Pop();
 
-                    if (input.Count != 0)
+                    if (i.ToString() == s)
                     {
-                        string q = input.Dequeue().ToString();
-                        char i = stack.Pop();
-                        if (i.ToString() == q)
-                        {
-                            TransitionPDA(3, input, stack);
-                        }
-                        else
-                        {
-                            TxtFinal.Content = "It's not a palindrome";
-                        }
+                        TransitionPDA(3, input, stack);
                     }
                     else
                     {
-                        if (stack.Count == 1) TransitionPDA(4, input, stack);
-                        else TxtFinal.Content = "It's not a palindrome";
+                        TxtFinal.Content="It's not a palindrome";
                     }
-                
-            }
-            
+                }
                 else
                 {
-                    InitialState.Fill = System.Windows.Media.Brushes.White;
-                    State2.Fill = System.Windows.Media.Brushes.White;
-                    State3.Fill = System.Windows.Media.Brushes.White;
-                    FinalState.Fill = System.Windows.Media.Brushes.Blue;
-                    FinalState2.Fill = System.Windows.Media.Brushes.Blue;
-                    stack.Pop();
-                    TxtFinal.Content = "It is a palindrome";
+                    if (stack.Count == 1) TransitionPDA(4, input, stack);
+                    else TxtFinal.Content="It's not a palindrome";
                 }
-          
-        }
-
-        private void Next_Click(object sender, RoutedEventArgs e)
-        {
-            next = true;
+            }
+            else
+            {
+                InitialState.Fill = System.Windows.Media.Brushes.White;
+                State2.Fill = System.Windows.Media.Brushes.White;
+                State3.Fill = System.Windows.Media.Brushes.White;
+                FinalState.Fill = System.Windows.Media.Brushes.Blue;
+                FinalState2.Fill = System.Windows.Media.Brushes.Blue;
+                stack.Pop();
+                TxtFinal.Content="It is a palindrome";
+            }
         }
     }
 }

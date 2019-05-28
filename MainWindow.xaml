@@ -40,7 +40,7 @@
 
         </Canvas>
         <TextBox x:Name="InputTextBox" HorizontalAlignment="Left" Height="23" Margin="46,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontFamily="Yu Gothic Light" AutomationProperties.Name="ingreso" />
-        <Button x:Name="Next" Content="Next" HorizontalAlignment="Left" Margin="559,315,0,0" VerticalAlignment="Top" Width="75" Click="Next_Click"/>
+        <Button x:Name="Next" Content="Next" HorizontalAlignment="Left" Margin="559,315,0,0" VerticalAlignment="Top" Width="75" />
 
     </Grid>
 </Window>
